@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Umbra — Inventário</title>
+
+  <link rel="stylesheet" href="inventory.css" />
+  <link rel="stylesheet" href="panel.css" />
+  <link rel="stylesheet" href="modal.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" type="image/png" href="umbra.png">
+</head>
+
+<body>
+
+<header class="topbar">
+  <h1>Umbra</h1>
+
+  <nav class="top-nav">
+    <a href="index.html" class="nav-button"><i class="fas fa-user"></i> PERSONAGEM</a>
+    <a href="details.html" class="nav-button"><i class="fas fa-info-circle"></i> DETALHES</a>
+    <a href="body.html" class="nav-button"><i class="fas fa-walking"></i> CORPO</a>
+    <a href="inventory.html" class="nav-button active"><i class="fas fa-bag-shopping"></i> INVENTÁRIO</a>
+    <a href="pacto.html" class="nav-button"><i class="fas fa-handshake"></i> PACTOS</a>
+  </nav>
+</header>
+
+
+
+
+<!-- ============ RIQUEZAS ============ -->
+<section class="panel">
+  <h2 class="title">Riquezas</h2>
+
+  <div class="wealth-grid">
+
+    <div class="wealth-box">
+      <label>Bronze</label>
+      <input id="bronze" type="number">
+    </div>
+
+    <div class="wealth-box">
+      <label>Prata</label>
+      <input id="prata" type="number">
+    </div>
+
+    <div class="wealth-box">
+      <label>Ouro</label>
+      <input id="ouro" type="number">
+    </div>
+
+    <div class="wealth-box">
+      <label>Platina</label>
+      <input id="platina" type="number">
+    </div>
+
+  </div>
+</section>
+
+
+
+
+<!-- ============ INVENTÁRIO ============ -->
+<section class="panel">
+  <h2 class="title">Inventário</h2>
+
+  <p class="slot-info">
+    Slots: <span id="slots-used">0</span> /
+    <input id="slots-limit" type="number" class="slot-limit" value="20">
+  </p>
+
+  <div class="add-buttons">
+    <button class="btn" onclick="openModal('arma')">Adicionar Arma</button>
+    <button class="btn" onclick="openModal('municao')">Adicionar Munição</button>
+    <button class="btn" onclick="openModal('protecao')">Adicionar Proteção</button>
+    <button class="btn" onclick="openModal('geral')">Adicionar Geral</button>
+    <button class="btn" onclick="openModal('corrompido')">Item Corrompido</button>
+  </div>
+
+  <div id="inventory-list" class="inventory-list"></div>
+</section>
+
+
+
+
+<!-- ============ MODAL DE ADIÇÃO DE ITEM ============ -->
+<div id="itemModal" class="modal">
+  <div class="modal-box">
+    <button id="closeModal" class="modal-close">X</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script src="inventory.js"></script>
+
+</body>
+</html>

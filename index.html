@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Umbra — Personagem</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="umbra.png">
+</head>
+<body>
+
+<header class="topbar">
+  <h1>Umbra</h1>
+
+  <nav class="top-nav">
+    <a href="index.html" class="nav-button active"><i class="fas fa-user"></i> PERSONAGEM</a>
+    <a href="details.html" class="nav-button"><i class="fas fa-info-circle"></i> DETALHES</a>
+    <a href="body.html" class="nav-button"><i class="fas fa-walking"></i> CORPO</a>
+    <a href="inventory.html" class="nav-button"><i class="fas fa-bag-shopping"></i> INVENTÁRIO</a>
+    <a href="pacto.html" class="nav-button"><i class="fas fa-handshake"></i> PACTOS</a>
+  </nav>
+</header>
+
+        
+<div class="character-details">
+    <div class="card">
+        <h2><i class="fas fa-id-card"></i> INFORMAÇÕES BÁSICAS</h2>
+        
+        <div class="basic-info-grid">
+            <!-- Primeira coluna -->
+            <div class="info-section">
+                <div class="info-section-title">IDENTIFICAÇÃO</div>
+                <div class="info-row">
+                    <div class="info-label">NOME DO PERSONAGEM</div>
+                    <div class="info-value">
+                        <input type="text" class="info-field" placeholder="Ex.: Joana Le Blanc" id="charName">
+                    </div>
+                </div>
+                
+                <div class="divider"></div>
+                
+                <div class="info-row">
+                    <div class="info-label">IDADE</div>
+                    <div class="info-value">
+                        <input type="text" class="info-field" placeholder="Ex.: 25 anos">
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+                
+                <div class="info-row">
+                    <div class="info-label">DATA DE NASCIMENTO</div>
+                    <div class="info-value">
+                        <input type="text" class="info-field" placeholder="Ex.: 27/04/1720">
+                    </div>
+                </div>
+
+                                <div class="divider"></div>
+                
+                <div class="info-row">
+                    <div class="info-label">FUNÇÃO</div>
+                    <div class="info-value">
+                        <input type="text" class="info-field" placeholder="Ex.: Dama de Companhia" id="charRole">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Segunda coluna -->
+            <div class="info-section">
+                <div class="info-section-title">CARACTERÍSTICAS FÍSICAS</div>
+                <div class="info-row">
+                    <div class="info-label">ALTURA</div>
+                    <div class="info-value">
+                        <input type="text" class="info-field" placeholder="Ex.: 1.80m">
+                    </div>
+                </div>
+                
+                <div class="divider"></div>
+                
+                <div class="info-row">
+                    <div class="info-label">PESO</div>
+                    <div class="info-value">
+                        <input type="text" class="info-field" placeholder="Ex.: 80kg">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Terceira coluna -->
+            <div class="compact-section">
+                <div class="info-section-title">ORIGEM</div>
+                <div class="info-row">
+                    <div class="info-label">ANCESTRALIDADE</div>
+                    <div class="info-value">
+                        <input type="text" class="info-field" placeholder="Ex.: Bruxa">
+                    </div>
+                </div>
+                
+                <div class="divider"></div>
+                
+                <div class="divider"></div>
+                
+                <div class="info-row">
+                    <div class="info-label">ALINHAMENTO</div>
+                    <div class="info-value">
+                        <input type="text" class="info-field" placeholder="Ex.: CN (Caótico Neutro)">
+                    </div>
+                </div>
+            </div>
+        </div>
+            </div>
+        </div>
+    </div>
+            
+<div class="card">
+    <h2>
+        <i class="fas fa-dice"></i> SISTEMA DE DADOS
+    </h2>
+    <div class="dice-system">
+        <div class="dice-title">Jogar os Dados</div>
+        
+        <div class="dice-result">
+            <div class="result-number" id="diceResult">3</div>
+            <div class="result-label">Total 3</div>
+        </div>
+        
+        <div class="dice-selection">
+            <div class="dice-button" data-dice="4">d4</div>
+            <div class="dice-button" data-dice="6">d6</div>
+            <div class="dice-button" data-dice="8">d8</div>
+            <div class="dice-button" data-dice="10">d10</div>
+            <div class="dice-button" data-dice="12">d12</div>
+            <div class="dice-button" data-dice="20">d20</div>
+        </div>
+        
+        <button class="roll-button" id="rollButton">
+            <i class="fas fa-dice-d20"></i> Rolar
+        </button>
+        
+        <div class="dice-history">
+            <div class="history-title">Últimos Resultados</div>
+            <div class="history-list" id="historyList">
+                <!-- Histórico será preenchido via JavaScript -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <h2><i class="fas fa-cogs"></i> SISTEMA DE ATRIBUTOS</h2>
+    
+    <div class="attributes-system">
+        <!-- Habilidades com Pontos -->
+        <div class="attributes-grid">
+            <!-- Físico -->
+            <div class="attribute-category">
+                <div class="category-header">
+                    <h3 class="category-title">FÍSICO</h3>
+                    <div class="points-counter">
+                        <span class="points-label">PONTOS FÍSICOS</span>
+                        <div class="points-value">10</div>
+                    </div>
+                </div>
+                <div class="attributes-list">
+                    <div class="attribute-item">
+                        <span class="attribute-name">Atletismo</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Acrobacia</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Furtividade</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Luta</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Arma branca</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Arma de fogo</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Precisão</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Reflexo</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Vigor</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Força bruta</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Montaria</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Sobrevivência</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Natação</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Armadilha</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Treinamento Marcial</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social -->
+            <div class="attribute-category">
+                <div class="category-header">
+                    <h3 class="category-title">SOCIAL</h3>
+                    <div class="points-counter">
+                        <span class="points-label">PONTOS SOCIAIS</span>
+                        <div class="points-value">10</div>
+                    </div>
+                </div>
+                <div class="attributes-list">
+                    <div class="attribute-item">
+                        <span class="attribute-name">Persuasão</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Intimidação</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Enganação</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Manipulação</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Carisma</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Etiqueta</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Negociação</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Interrogação</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Atuação</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Intuição Social</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Liderança</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Infiltração Social</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Rede de contatos</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Sedução</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Discurso Público</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mental -->
+            <div class="attribute-category">
+                <div class="category-header">
+                    <h3 class="category-title">MENTAL</h3>
+                    <div class="points-counter">
+                        <span class="points-label">PONTOS MENTAIS</span>
+                        <div class="points-value">10</div>
+                    </div>
+                </div>
+                <div class="attributes-list">
+                    <div class="attribute-item">
+                        <span class="attribute-name">Investigação</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Ciência Natural</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Ocultismo</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Alquimia</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Herbalismo</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Anatomia</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Criptografia</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">História</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Linguística</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Psicologia</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Engenho Antigo</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Memória Eidética</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Rituais Arcanos</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Xenosofia</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">Pneumatologia</span>
+                        <div class="attribute-dots" data-level="0" data-cost="1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!-- Atributos Principais com Pontos -->
+        <div class="status-grid">
+            <div class="status-section">
+                <div class="category-header">
+                    <h3 class="status-title">ATRIBUTOS PRINCIPAIS</h3>
+                    <div class="points-counter">
+                        <span class="points-label">PONTOS DE ATRIBUTO</span>
+                        <div class="points-value">10</div>
+                    </div>
+                </div>
+                <div class="attributes-list">
+                    <div class="attribute-item">
+                        <span class="attribute-name">FORÇA</span>
+                        <div class="attribute-dots" data-level="0" data-cost="2">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-name">AGILIDADE</span>
+                        <div class="attribute-dots" data-level="0" data-cost="2">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+        <div class="attribute-item">
+            <span class="attribute-name">INTELECTO</span>
+                        <div class="attribute-dots" data-level="0" data-cost="2">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+        <div class="attribute-item">
+            <span class="attribute-name">VONTADE</span>
+                        <div class="attribute-dots" data-level="0" data-cost="2">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+        <div class="attribute-item">
+            <span class="attribute-name">PRESENÇA</span>
+                        <div class="attribute-dots" data-level="0" data-cost="2">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+        <div class="attribute-item">
+            <span class="attribute-name">INTUIÇÃO</span>
+                        <div class="attribute-dots" data-level="0" data-cost="2">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+        <div class="attribute-item">
+            <span class="attribute-name">LÓGICA</span>
+                        <div class="attribute-dots" data-level="0" data-cost="2">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+        <div class="attribute-item">
+            <span class="attribute-name">TÉCNICA</span>
+                        <div class="attribute-dots" data-level="0" data-cost="2">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+    </div>
+</div>
+
+            <!-- Status -->
+            <div class="status-section">
+                <h3 class="status-title">STATUS</h3>
+                <div class="status-values">
+                    <div class="status-item">
+                        <div class="status-label">HP</div>
+                        <div class="status-value">
+                            <input type="text" class="status-input" value="0">
+                            <span class="status-separator">/</span>
+                            <input type="text" class="status-input" value="0">
+                        </div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-label">CORRUPTIBILIDADE</div>
+                        <div class="status-value">
+                            <input type="text" class="status-input large" value="0">
+                        </div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-label">SANIDADE</div>
+                        <div class="status-value">
+                            <input type="text" class="status-input" value="0">
+                            <span class="status-separator">/</span>
+                            <input type="text" class="status-input" value="0">
+                        </div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-label">PONTO DE ESFORÇO</div>
+                        <div class="status-value">
+                            <input type="text" class="status-input" value="0">
+                            <span class="status-separator">/</span>
+                            <input type="text" class="status-input" value="0">
+                        </div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-label">DEFESA</div>
+                        <div class="status-value">
+                            <input type="text" class="status-input large" value="0">
+                        </div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-label">ATAQUE</div>
+                        <div class="status-value">
+                            <input type="text" class="status-input large" value="0">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script src="script.js"></script>
+</body>
+</html>

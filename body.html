@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Umbra — Corpo</title>
+    <link rel="stylesheet" href="body.css">
+    <!-- Adicione esta linha -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="umbra.png">
+    
+</head>
+<body>
+
+<header class="topbar">
+  <h1>Umbra</h1>
+
+  <nav class="top-nav">
+    <a href="index.html" class="nav-button"><i class="fas fa-user"></i> PERSONAGEM</a>
+    <a href="details.html" class="nav-button"><i class="fas fa-info-circle"></i> DETALHES</a>
+    <a href="body.html" class="nav-button active"><i class="fas fa-walking"></i> CORPO</a>
+    <a href="inventory.html" class="nav-button"><i class="fas fa-bag-shopping"></i> INVENTÁRIO</a>
+    <a href="pacto.html" class="nav-button"><i class="fas fa-handshake"></i> PACTOS</a>
+  </nav>
+</header>
+    <!-- Seção Marcas e Danos -->
+<div class="gear-section">
+    <h3 class="gear-title">Marcas & Danos</h3>
+    
+    <!-- Sistema de Danos Rápidos -->
+    <div class="damage-tracker">
+        <h4 class="damage-title">Rastreador de Danos</h4>
+        <div class="damage-grid">
+            <!-- Dano Mental -->
+            <div class="damage-type">
+                <div class="damage-header">
+                    <i class="fas fa-brain damage-icon mental"></i>
+                    <span class="damage-label">Dano Mental</span>
+                </div>
+                <div class="damage-dots" data-type="mental">
+                    <div class="damage-dot" data-level="1"></div>
+                    <div class="damage-dot" data-level="2"></div>
+                    <div class="damage-dot" data-level="3"></div>
+                </div>
+            </div>
+            
+            <!-- Dano Físico -->
+            <div class="damage-type">
+                <div class="damage-header">
+                    <i class="fas fa-dumbbell damage-icon physical"></i>
+                    <span class="damage-label">Dano Físico</span>
+                </div>
+                <div class="damage-dots" data-type="physical">
+                    <div class="damage-dot" data-level="1"></div>
+                    <div class="damage-dot" data-level="2"></div>
+                    <div class="damage-dot" data-level="3"></div>
+                </div>
+            </div>
+            
+            <!-- Dano Sangrento -->
+            <div class="damage-type">
+                <div class="damage-header">
+                    <i class="fas fa-tint damage-icon blood"></i>
+                    <span class="damage-label">Dano Sangrento</span>
+                </div>
+                <div class="damage-dots" data-type="blood">
+                    <div class="damage-dot" data-level="1"></div>
+                    <div class="damage-dot" data-level="2"></div>
+                    <div class="damage-dot" data-level="3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Seção Estados -->
+<div class="gear-section">
+    <h3 class="gear-title">Estados</h3>
+    
+    <div class="states-container">
+                <!-- Estados Mentais -->
+        <div class="state-category">
+            <h4 class="state-title">Estados Mentais</h4>
+            <div class="states-table">
+                <div class="state-row header">
+                    <div class="state-name">Estado</div>
+                    <div class="state-value">Valor</div>
+                </div>
+                <div class="state-row">
+                    <div class="state-name">Medo</div>
+                    <div class="state-value">
+                        <input type="number" class="state-input" value="0" min="0" max="10">
+                    </div>
+                </div>
+                <div class="state-row">
+                    <div class="state-name">Pavor</div>
+                    <div class="state-value">
+                        <input type="number" class="state-input" value="0" min="0" max="10">
+                    </div>
+                </div>
+                <div class="state-row">
+                    <div class="state-name">Fobia</div>
+                    <div class="state-value">
+                        <input type="number" class="state-input" value="0" min="0" max="10">
+                    </div>
+                </div>
+                <div class="state-row">
+                    <div class="state-name">Curto circuito</div>
+                    <div class="state-value">
+                        <input type="number" class="state-input" value="0" min="0" max="10">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Estados Físicos -->
+        <div class="state-category">
+            <h4 class="state-title">Estados Físicos</h4>
+            <div class="states-table">
+                <div class="state-row header">
+                    <div class="state-name">Estado</div>
+                    <div class="state-value">Valor</div>
+                </div>
+                <div class="state-row">
+                    <div class="state-name">Dor</div>
+                    <div class="state-value">
+                        <input type="number" class="state-input" value="0" min="0" max="10">
+                    </div>
+                </div>
+                <div class="state-row">
+                    <div class="state-name">Incapacitação Menor</div>
+                    <div class="state-value">
+                        <input type="number" class="state-input" value="0" min="0" max="10">
+                    </div>
+                </div>
+                <div class="state-row">
+                    <div class="state-name">Amputação</div>
+                    <div class="state-value">
+                        <input type="number" class="state-input" value="0" min="0" max="10">
+                    </div>
+                </div>
+                <div class="state-row">
+                    <div class="state-name">Incapacitação Completa</div>
+                    <div class="state-value">
+                        <input type="number" class="state-input" value="0" min="0" max="10">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Estados Sangrentos -->
+        <div class="state-category">
+            <h4 class="state-title">Estados Sangrentos</h4>
+            <div class="states-table">
+                <div class="state-row header">
+                    <div class="state-name">Estado</div>
+                    <div class="state-value">Valor</div>
+                </div>
+                <div class="state-row">
+                    <div class="state-name">Hemorragia</div>
+                    <div class="state-value">
+                        <input type="number" class="state-input" value="0" min="0" max="10">
+                    </div>
+                </div>
+                <div class="state-row">
+                    <div class="state-name">Anemia</div>
+                    <div class="state-value">
+                        <input type="number" class="state-input" value="0" min="0" max="10">
+                    </div>
+                </div>
+                <div class="state-row">
+                    <div class="state-name">Contaminação</div>
+                    <div class="state-value">
+                        <input type="number" class="state-input" value="0" min="0" max="10">
+                    </div>
+                </div>
+                <div class="state-row">
+                    <div class="state-name">Coagulação</div>
+                    <div class="state-value">
+                        <input type="number" class="state-input" value="0" min="0" max="10">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para adicionar marca -->
+<div class="modal" id="markModal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3>Adicionar Marca</h3>
+        
+        <div class="form-group">
+            <label>TIPO DA MARCA</label>
+            <select id="markType">
+                <option value="tale">História</option>
+                <option value="scar">Cicatriz</option>
+                <option value="tattoo">Tatuagem</option>
+                <option value="birthmark">Marca de Nascença</option>
+                <option value="custom">Personalizado</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label>DESCRIÇÃO</label>
+            <textarea id="markDescription" placeholder="Descreva a marca..."></textarea>
+        </div>
+        
+        <div class="form-group" id="scarSourceGroup" style="display: none;">
+            <label>QUAL FOI A ORIGEM DA CICATRIZ?</label>
+            <input type="text" id="scarSource" placeholder="Ex: Corte com uma faca">
+        </div>
+        
+        <div class="form-group" id="customMarkGroup" style="display: none;">
+            <label>TIPO PERSONALIZADO</label>
+            <input type="text" id="customMarkType" placeholder="Digite o tipo personalizado...">
+        </div>
+        
+        <div class="modal-buttons">
+            <button class="cancel-btn" id="cancelMark">Cancelar</button>
+            <button class="save-btn" id="saveMark">Salvar Marca</button>
+        </div>
+    </div>
+</div>
+
+    <script src="body.js"></script>
+</body>
+</html>
