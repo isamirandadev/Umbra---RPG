@@ -1,4 +1,6 @@
-// Adiciona funcionalidade aos campos editáveis
+// ===============================
+// CAMPOS EDITÁVEIS GENÉRICOS
+// ===============================
 document.addEventListener('DOMContentLoaded', function() {
     const editableFields = document.querySelectorAll('.editable-field');
     
@@ -16,9 +18,18 @@ document.addEventListener('DOMContentLoaded', function() {
             field.value = savedValue;
         }
     });
+
+    // Inicializa sistema de dados
+    window.diceSystem = new DiceSystem();
+
+    // Inicializa sistema de pontos de atributos
+    window.pointsSystem = new PointsSystem();
 });
 
-// Sistema de Dados
+
+// ===============================
+// SISTEMA DE DADOS
+// ===============================
 class DiceSystem {
     constructor() {
         this.selectedDice = 20; // d20 padrão
@@ -39,9 +50,11 @@ class DiceSystem {
         
         // Botão de rolar
         const rollButton = document.getElementById('rollButton');
-        rollButton.addEventListener('click', () => {
-            this.rollDice();
-        });
+        if (rollButton) {
+            rollButton.addEventListener('click', () => {
+                this.rollDice();
+            });
+        }
         
         // Seleciona d20 por padrão
         this.selectDice(20);
@@ -68,6 +81,8 @@ class DiceSystem {
         const resultElement = document.getElementById('diceResult');
         const rollButton = document.getElementById('rollButton');
         
+        if (!resultElement || !rollButton) return;
+        
         // Animação
         resultElement.classList.add('rolling');
         rollButton.disabled = true;
@@ -90,7 +105,10 @@ class DiceSystem {
                 rollButton.disabled = false;
                 
                 // Atualiza label
-                document.querySelector('.result-label').textContent = `Total ${finalResult}`;
+                const label = document.querySelector('.result-label');
+                if (label) {
+                    label.textContent = `Total ${finalResult}`;
+                }
                 
                 // Adiciona ao histórico
                 this.addToHistory(finalResult, this.selectedDice);
@@ -119,6 +137,8 @@ class DiceSystem {
     
     updateHistoryDisplay() {
         const historyList = document.getElementById('historyList');
+        if (!historyList) return;
+        
         historyList.innerHTML = '';
         
         this.history.forEach(item => {
@@ -145,106 +165,104 @@ class DiceSystem {
     }
 }
 
-// Inicializa o sistema de dados quando o DOM carregar
-document.addEventListener('DOMContentLoaded', function() {
-    // Sistema de campos editáveis (código anterior)
-    const editableFields = document.querySelectorAll('.editable-field');
-    
-    editableFields.forEach(field => {
-        field.addEventListener('blur', function() {
-            if (this.value.trim() !== '') {
-                localStorage.setItem(this.placeholder || this.id, this.value);
-            }
-        });
-        
-        const savedValue = localStorage.getItem(field.placeholder || field.id);
-        if (savedValue) {
-            field.value = savedValue;
-        }
-    });
-    
-    // Inicializa sistema de dados
-    new DiceSystem();
-});
 
+// ===============================
+// SISTEMA DE PONTOS DE ATRIBUTOS
+// ===============================
 class PointsSystem {
     constructor() {
         this.initializePointsSystem();
     }
     
-initializeCategory(categoryName, defaultPoints) {
-    console.log(`Procurando categoria: ${categoryName}`);
-
-    const categoryElement = this.findCategoryElement(categoryName);
-
-    if (!categoryElement) {
-        console.log(`Categoria ${categoryName} não encontrada!`);
-        return;
+    initializePointsSystem() {
+        // Cada categoria começa com 10 pontos (pode ser alterado no input depois)
+        this.initializeCategory('FÍSICO', 10);
+        this.initializeCategory('SOCIAL', 10);
+        this.initializeCategory('MENTAL', 10);
+        this.initializeCategory('ATRIBUTOS PRINCIPAIS', 10);
+            this.initializeCategory('OFÍCIO', 10);
+    this.initializeCategory('ARTE', 10);
+    this.initializeCategory('OCULTO', 10);
+    this.initializeCategory('LUTA', 10);
+    this.initializeCategory('PACTO', 10);
+        
+        // Habilita edição manual dos pontos pelo mestre
+        this.enableEditableCategoryPoints();
     }
-
-    console.log(`Categoria ${categoryName} encontrada!`);
-
-    const pointsValue = categoryElement.querySelector('.points-value');
     
-    // SEMPRE usa 10 pontos, ignora localStorage
-    pointsValue.textContent = "10";
-    pointsValue.dataset.max = "10";
+    initializeCategory(categoryName, defaultPoints) {
+        console.log(`Procurando categoria: ${categoryName}`);
 
-    this.initializeDotsForCategory(categoryElement, categoryName);
-}
+        const categoryElement = this.findCategoryElement(categoryName);
 
-initializePointsSystem() {
-    // data as categorias começam com 10 pontos
-    this.initializeCategory('FÍSICO', 10);
-    this.initializeCategory('SOCIAL', 10);
-    this.initializeCategory('MENTAL', 10);
-    this.initializeCategory('ATRIBUTOS PRINCIPAIS', 10);
+        if (!categoryElement) {
+            console.log(`Categoria ${categoryName} não encontrada!`);
+            return;
+        }
+
+        console.log(`Categoria ${categoryName} encontrada!`);
+
+        const pointsValue = categoryElement.querySelector('.points-value');
+        
+        if (!pointsValue) {
+            console.log(`Elemento .points-value não encontrado em ${categoryName}`);
+            return;
+        }
+
+// Permitir edição normal no input de pontos
+pointsValue.removeAttribute("readonly");
+pointsValue.type = "number";
+pointsValue.min = "0";
+pointsValue.step = "1";
+
+
+        this.initializeDotsForCategory(categoryElement, categoryName);
+    }
     
-    // Não carrega estado salvo - sempre começa fresco
-    // this.loadSavedState();
-}
-    
-findCategoryElement(categoryName) {
-    const categories = document.querySelectorAll('.attribute-category, .status-section');
-    console.log(`Total de categorias encontradas: ${categories.length}`); // DEBUG
-    
-    for (let category of categories) {
-        const title = category.querySelector('.category-title, .status-title');
-        if (title) {
-            console.log(`Título encontrado: "${title.textContent.trim()}"`); // DEBUG
-            if (title.textContent.trim() === categoryName) {
-                return category;
+    findCategoryElement(categoryName) {
+        const categories = document.querySelectorAll('.attribute-category, .status-section');
+        console.log(`Total de categorias encontradas: ${categories.length}`);
+        
+        for (let category of categories) {
+            const title = category.querySelector('.category-title, .status-title');
+            if (title) {
+                console.log(`Título encontrado: "${title.textContent.trim()}"`);
+                if (title.textContent.trim() === categoryName) {
+                    return category;
+                }
             }
         }
+        return null;
     }
-    return null;
-}
     
-initializeDotsForCategory(categoryElement, categoryName) {
-    const dotsContainers = categoryElement.querySelectorAll('.attribute-dots');
-    const pointsValue = categoryElement.querySelector('.points-value');
-    
-    dotsContainers.forEach(dotContainer => {
-        // SEMPRE começa no nível 0
-        dotContainer.dataset.level = '0';
-        this.updateDotsVisual(dotContainer);
+    initializeDotsForCategory(categoryElement, categoryName) {
+        const dotsContainers = categoryElement.querySelectorAll('.attribute-dots');
+        const pointsValue = categoryElement.querySelector('.points-value');
+        const currentPoints = parseInt(pointsValue.value) || 0;
         
-        // Adiciona eventos de clique
-        const dots = dotContainer.querySelectorAll('.dot');
-        dots.forEach((dot, index) => {
-            dot.addEventListener('click', () => {
-                this.handleDotClick(dotContainer, index, categoryName, pointsValue);
+        dotsContainers.forEach(dotContainer => {
+            // SEMPRE começa no nível 0
+            dotContainer.dataset.level = '0';
+            this.updateDotsVisual(dotContainer);
+            
+            // Adiciona eventos de clique
+            const dots = dotContainer.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    this.handleDotClick(dotContainer, index, categoryName, pointsValue);
+                });
             });
+            
+            this.updateDotContainerState(dotContainer, currentPoints);
         });
-        
-        this.updateDotContainerState(dotContainer, parseInt(pointsValue.textContent));
-    });
-}
+
+        this.updatePointsVisual(pointsValue, currentPoints);
+    }
     
     handleDotClick(dotContainer, clickedIndex, categoryName, pointsValue) {
         const currentLevel = parseInt(dotContainer.dataset.level);
         const costPerDot = parseInt(dotContainer.dataset.cost) || 1;
-        const currentPoints = parseInt(pointsValue.textContent);
+        const currentPoints = parseInt(pointsValue.value) || 0;
         const maxLevel = 5;
         
         let newLevel;
@@ -255,6 +273,9 @@ initializeDotsForCategory(categoryElement, categoryName) {
             // Aumentar nível (gastar pontos)
             newLevel = clickedIndex + 1;
         }
+
+        if (newLevel < 0) newLevel = 0;
+        if (newLevel > maxLevel) newLevel = maxLevel;
         
         const pointsDifference = (newLevel - currentLevel) * costPerDot;
         const newPoints = currentPoints - pointsDifference;
@@ -266,7 +287,7 @@ initializeDotsForCategory(categoryElement, categoryName) {
         }
         
         // Atualiza pontos e nível
-        pointsValue.textContent = newPoints;
+        pointsValue.value = newPoints;
         dotContainer.dataset.level = newLevel;
         
         // Atualiza visual
@@ -319,7 +340,9 @@ initializeDotsForCategory(categoryElement, categoryName) {
         if (!categoryElement) return;
         
         const pointsValue = categoryElement.querySelector('.points-value');
-        const availablePoints = parseInt(pointsValue.textContent);
+        if (!pointsValue) return;
+
+        const availablePoints = parseInt(pointsValue.value) || 0;
         const dotsContainers = categoryElement.querySelectorAll('.attribute-dots');
         
         dotsContainers.forEach(dotContainer => {
@@ -343,22 +366,24 @@ initializeDotsForCategory(categoryElement, categoryName) {
         
         // Salva nível da skill
         if (dotContainer) {
-            const skillName = dotContainer.closest('.attribute-item').querySelector('.attribute-name').textContent;
+            const attributeItem = dotContainer.closest('.attribute-item');
+            if (!attributeItem) return;
+
+            const nameElement = attributeItem.querySelector('.attribute-name');
+            if (!nameElement) return;
+
+            const skillName = nameElement.textContent.trim();
             localStorage.setItem(`skill_${categoryName}_${skillName}`, dotContainer.dataset.level);
         }
     }
     
-    loadSavedState() {
-        // Os estados são carregados durante a inicialização de cada categoria
-    }
-    
-    // Método para resetar pontos (opcional)
+    // Método para resetar pontos (opcional, continua funcionando)
     resetCategory(categoryName, defaultPoints) {
         const categoryElement = this.findCategoryElement(categoryName);
         if (!categoryElement) return;
         
         const pointsValue = categoryElement.querySelector('.points-value');
-        pointsValue.textContent = defaultPoints;
+        pointsValue.value = defaultPoints;
         pointsValue.dataset.max = defaultPoints;
         
         // Reseta todos os dots da categoria
@@ -368,6 +393,7 @@ initializeDotsForCategory(categoryElement, categoryName) {
             this.updateDotsVisual(dotContainer);
         });
         
+        this.updatePointsVisual(pointsValue, defaultPoints);
         this.updateAllDotsStateInCategory(categoryName);
         localStorage.removeItem(`points_${categoryName}`);
         
@@ -378,9 +404,31 @@ initializeDotsForCategory(categoryElement, categoryName) {
             }
         });
     }
-}
 
-// Inicializa o sistema quando o DOM carregar
-document.addEventListener('DOMContentLoaded', function() {
-    new PointsSystem();
-});
+    // Habilita edição manual dos pontos (Físico, Social, Mental, Atributos Principais)
+    enableEditableCategoryPoints() {
+        const inputs = document.querySelectorAll('.points-value');
+
+        inputs.forEach(input => {
+            input.addEventListener('change', () => {
+                let newValue = parseInt(input.value) || 0;
+                if (newValue < 0) newValue = 0;
+                input.value = newValue;
+
+                const categoryElement = input.closest('.attribute-category, .status-section');
+                if (!categoryElement) return;
+
+                const titleEl = categoryElement.querySelector('.category-title, .status-title');
+                if (!titleEl) return;
+
+                const categoryName = titleEl.textContent.trim();
+
+                console.log(`Novo valor em ${categoryName}: ${newValue}`);
+
+                this.updatePointsVisual(input, newValue);
+                this.updateAllDotsStateInCategory(categoryName);
+                this.saveState(categoryName, newValue, null);
+            });
+        });
+    }
+}

@@ -390,7 +390,7 @@ h1 {
   display:flex;
   justify-content:space-between;
   gap:12px;
-  background:linear-gradient(180deg,#343434,#2b2b2b);
+  background:linear-gradient(180deg,#000000,#2a2828);
   border-radius:8px;
   padding:12px;
   border:1px solid rgba(0,0,0,0.6);
@@ -398,10 +398,10 @@ h1 {
 }
 .pacto-item .pacto-header{ display:flex; gap:8px; align-items:center }
 .pacto-nome{ color:var(--accent); margin:0; font-size:1rem }
-.pacto-elemento{ background:#7a0606; color:rgb(255, 255, 255); padding:3px 8px; border-radius:6px; font-size:0.8rem }
+.pacto-elemento{ background:#97070796; color:rgb(255, 255, 255); padding:3px 8px; border-radius:6px; font-size:0.8rem }
 
-.pacto-meta{ display:flex; gap:8px; flex-wrap:wrap; color:var(--muted); font-size:0.85rem; margin:6px 0 }
-.pacto-desc{ color:var(--muted); margin:6px 0 8px; font-size:0.9rem }
+.pacto-meta{ display:flex; gap:8px; flex-wrap:wrap; color:white; font-size:0.85rem; margin:6px 0 }
+.pacto-desc{ color:white; margin:6px 0 8px; font-size:0.9rem }
 
 /* + button to add pacto from modal */
 .pacto-add{
