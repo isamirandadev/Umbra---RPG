@@ -183,44 +183,149 @@
     </div>
 </div>
 
-<!-- Modal para adicionar marca -->
-<div class="modal" id="markModal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h3>Adicionar Marca</h3>
-        
-        <div class="form-group">
-            <label>TIPO DA MARCA</label>
-            <select id="markType">
-                <option value="tale">História</option>
-                <option value="scar">Cicatriz</option>
-                <option value="tattoo">Tatuagem</option>
-                <option value="birthmark">Marca de Nascença</option>
-                <option value="custom">Personalizado</option>
-            </select>
-        </div>
-        
-        <div class="form-group">
-            <label>DESCRIÇÃO</label>
-            <textarea id="markDescription" placeholder="Descreva a marca..."></textarea>
-        </div>
-        
-        <div class="form-group" id="scarSourceGroup" style="display: none;">
-            <label>QUAL FOI A ORIGEM DA CICATRIZ?</label>
-            <input type="text" id="scarSource" placeholder="Ex: Corte com uma faca">
-        </div>
-        
-        <div class="form-group" id="customMarkGroup" style="display: none;">
-            <label>TIPO PERSONALIZADO</label>
-            <input type="text" id="customMarkType" placeholder="Digite o tipo personalizado...">
-        </div>
-        
-        <div class="modal-buttons">
-            <button class="cancel-btn" id="cancelMark">Cancelar</button>
-            <button class="save-btn" id="saveMark">Salvar Marca</button>
+<div class="gear-section">
+    <h3 class="gear-title">Golpes</h3>
+
+            <!-- Área principal de combate -->
+            <section class="content-area">
+                <div class="combat-header">
+                    <div class="combat-controls">
+                        <button class="combat-btn" id="showMovesBtn">
+                            <i class="fas fa-swords"></i> Golpes Existentes
+                        </button>
+                        <button class="combat-btn primary" id="addMoveBtn">
+                            <i class="fas fa-plus"></i> Novo Golpe
+                        </button>
+                    </div>
+                    
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Buscar golpe...">
+                    </div>
+                </div>
+
+                <div class="moves-container" id="movesContainer">
+                    <!-- Golpes serão renderizados aqui -->
+                    <div class="empty-state">
+                        <i class="fas fa-fist-raised"></i>
+                        <h3>Nenhum golpe encontrado</h3>
+                        <p>Clique em "Novo Golpe" para criar seu primeiro golpe de combate</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal de Golpes Existentes -->
+    <div class="modal" id="existingMovesModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-swords"></i> Golpes Existentes</h2>
+                <button class="close-modal" id="closeMovesModal">&times;</button>
+            </div>
+            
+            <div class="existing-moves-list" id="existingMovesList">
+                <!-- Golpes existentes carregados aqui -->
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="cancel-btn" id="closeMovesListBtn">Fechar</button>
+            </div>
         </div>
     </div>
-</div>
+
+    <!-- Modal para adicionar/editar golpe -->
+    <div class="modal" id="moveModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Novo Golpe de Combate</h2>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+
+            <form id="moveForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="moveName"><i class="fas fa-tag"></i> Nome do Golpe*</label>
+                        <input type="text" id="moveName" placeholder="Ex: Corte Horizontal, Estocada, Ataque Giratório" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="moveType"><i class="fas fa-star"></i> Tipo*</label>
+                        <select id="moveType" required>
+                            <option value="">Selecione o tipo</option>
+                            <option value="basic">Básico</option>
+                            <option value="advanced">Avançado</option>
+                            <option value="special">Especial</option>
+                            <option value="finisher">Finalizador</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="moveCost"><i class="fas fa-bolt"></i> Custo (PE)</label>
+                        <input type="number" id="moveCost" min="0" value="0" placeholder="Pontos de Esforço">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="moveDamage"><i class="fas fa-tint"></i> Dano Base</label>
+                        <input type="text" id="moveDamage" placeholder="Ex: 1d8+FOR, 2d6, 1d10+3">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-align-left"></i> Descrição do Golpe*</label>
+                    <textarea id="moveDescription" placeholder="Descreva como o golpe é executado, seus efeitos e características especiais..." required></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="moveBonus"><i class="fas fa-plus-circle"></i> Bônus no Ataque</label>
+                        <input type="number" id="moveBonus" value="0" placeholder="+X no ataque">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="moveCritical"><i class="fas fa-crosshairs"></i> Crítico</label>
+                        <input type="text" id="moveCritical" placeholder="Ex: 19-20, 20, 18-20">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="moveEffect"><i class="fas fa-magic"></i> Efeito Especial</label>
+                    <textarea id="moveEffect" placeholder="Efeitos adicionais (sangramento, atordoamento, etc.)" rows="3"></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="moveAttribute"><i class="fas fa-dumbbell"></i> Atributo Principal</label>
+                        <select id="moveAttribute">
+                            <option value="">Nenhum específico</option>
+                            <option value="FOR">Força (FOR)</option>
+                            <option value="AGI">Agilidade (AGI)</option>
+                            <option value="VIG">Vigor (VIG)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="moveRange"><i class="fas fa-ruler"></i> Alcance</label>
+                        <select id="moveRange">
+                            <option value="melee">Corpo-a-Corpo</option>
+                            <option value="close">Curto (1.5m)</option>
+                            <option value="medium">Médio (3m)</option>
+                            <option value="long">Longo (6m+)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="cancel-btn" id="cancelBtn">Cancelar</button>
+                    <button type="submit" class="save-btn">Salvar Golpe</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
+
     <script src="storage.js"></script>
     <script src="body.js"></script>
 </body>
