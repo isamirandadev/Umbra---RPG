@@ -69,7 +69,7 @@ class MarksSystem {
         }
         
         // Garante que o dano fique entre 0 e 3
-        this.damage[type] = Math.max(0, Math.min(3, this.damage[type]));
+        this.damage[type] = Math.max(0, Math.min(4, this.damage[type]));
         
         console.log('Novo valor:', this.damage[type]);
         
