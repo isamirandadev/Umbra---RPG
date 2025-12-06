@@ -68,7 +68,7 @@ class MarksSystem {
             this.damage[type] = level;
         }
         
-        // Garante que o dano fique entre 0 e 3
+        // Garante que o dano fique entre 0 e 4
         this.damage[type] = Math.max(0, Math.min(4, this.damage[type]));
         
         console.log('Novo valor:', this.damage[type]);
@@ -78,29 +78,35 @@ class MarksSystem {
     }
     
     renderDamage() {
-        console.log('Renderizando damage:', this.damage);
+    console.log('Renderizando damage:', this.damage);
+    
+    const damageTypes = ['mental', 'physical', 'blood'];
+    
+    damageTypes.forEach(type => {
+        const dots = document.querySelectorAll(`.damage-dots[data-type="${type}"] .damage-dot`);
+        const currentLevel = this.damage[type];
         
-        const damageTypes = ['mental', 'physical', 'blood'];
+        console.log(`Tipo: ${type}, Nível atual: ${currentLevel}, Total de dots: ${dots.length}`);
         
-        damageTypes.forEach(type => {
-            const dots = document.querySelectorAll(`.damage-dots[data-type="${type}"] .damage-dot`);
-            const currentLevel = this.damage[type];
-            
-            console.log(`Tipo: ${type}, Nível: ${currentLevel}, Dots: ${dots.length}`);
-            
-            dots.forEach((dot, index) => {
-                const dotLevel = parseInt(dot.dataset.level);
-                console.log(`Dot ${index}: level ${dotLevel}, currentLevel ${currentLevel}`);
-                
-                if (dotLevel <= currentLevel) {
-                    dot.classList.add('filled');
-                    console.log(`Preenchendo dot ${index} do tipo ${type}`);
-                } else {
-                    dot.classList.remove('filled');
-                }
-            });
+        // VERIFICAÇÃO DE DEBUG
+        dots.forEach((dot, index) => {
+            console.log(`Dot ${index + 1}: data-level="${dot.dataset.level}", está no DOM? ${dot !== null}`);
         });
-    }
+        
+        dots.forEach((dot, index) => {
+            const dotLevel = parseInt(dot.dataset.level);
+            
+            // CORREÇÃO: Garantir que está comparando corretamente
+            if (dotLevel <= currentLevel) {
+                dot.classList.add('filled');
+                console.log(`✓ Preenchendo dot ${index + 1} (nível ${dotLevel}) do tipo ${type}`);
+            } else {
+                dot.classList.remove('filled');
+                console.log(`○ Limpando dot ${index + 1} (nível ${dotLevel}) do tipo ${type}`);
+            }
+        });
+    });
+}
     
     saveDamage() {
         localStorage.setItem('characterDamage', JSON.stringify(this.damage));
